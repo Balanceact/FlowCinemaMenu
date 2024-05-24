@@ -93,9 +93,19 @@ namespace FlowCinemaMenu
 
         private static void TheThirdWord()
         {
-            string sentence = AskForString("Mening som är minst 3 ord lång");
-            string[] wordsInSentence = sentence.Split(' ');                     
-            Console.WriteLine(wordsInSentence[2]);
+            bool atLeastThree = false;
+            string sentence;
+
+            do
+            {
+                sentence = AskForString("Mening som är minst 3 ord lång");
+                string[] wordsInSentence = sentence.Split(' ');
+                if (wordsInSentence.Length > 2)
+                {
+                    Console.WriteLine(wordsInSentence[2]);
+                    atLeastThree = true;
+                }
+            } while (!atLeastThree);
         }
 
         private static int AgeVerification()
