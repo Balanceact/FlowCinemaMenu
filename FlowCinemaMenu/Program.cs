@@ -26,6 +26,9 @@ namespace FlowCinemaMenu
                 case "2":
                     TicketPriceForX();
                     return true;
+                case "3":
+                    RepeatTenTimes();
+                    return true;
                 default:
                     Console.WriteLine("Vänligen gör ett korrekt val i menyn.");
                     return true;
@@ -37,6 +40,7 @@ namespace FlowCinemaMenu
             Console.WriteLine("Välkommen till din lokala biograf. Gör ett val:");
             Console.WriteLine("1) Biljettpris för en besökare");
             Console.WriteLine("2) Biljettpris för flera besökare");
+            Console.WriteLine("3) Repetera text tio gånger");
             Console.WriteLine("0) Quit / Exit");
         }
 
@@ -89,6 +93,16 @@ namespace FlowCinemaMenu
                 totalCost += AgeVerification();
             }
             Console.WriteLine($"Ni är {visitors} besökare och eran totala kostnad för biljetterna är {totalCost}kr.");
+        }
+
+        private static void RepeatTenTimes()
+        {
+            Console.WriteLine("Vänligen skriv vad du vill ha upprepat.");
+            string textToRepeat = AskForString("Text");
+            for (int i = 0;i < 10; i++)
+            {
+                Console.Write(textToRepeat);
+            }
         }
 
         private static string AskForString(string prompt)
