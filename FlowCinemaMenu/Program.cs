@@ -29,6 +29,9 @@ namespace FlowCinemaMenu
                 case "3":
                     RepeatTenTimes();
                     return true;
+                case "4":
+                    TheThirdWord();
+                    return true;
                 default:
                     Console.WriteLine("Vänligen gör ett korrekt val i menyn.");
                     return true;
@@ -36,30 +39,13 @@ namespace FlowCinemaMenu
         }
 
         private static void PrintMenu()
-        {   
+        {
             Console.WriteLine("Välkommen till din lokala biograf. Gör ett val:");
             Console.WriteLine("1) Biljettpris för en besökare");
             Console.WriteLine("2) Biljettpris för flera besökare");
             Console.WriteLine("3) Repetera text tio gånger");
+            Console.WriteLine("4) Det tredje ordet");
             Console.WriteLine("0) Quit / Exit");
-        }
-
-        private static int AgeVerification()
-        {
-            int age = AskForInt("Ålder");
-            int cost = 0;
-            if (age > 0 && age <= 5 || age > 100)
-                cost = 0;
-            else if (age > 5 && age < 20)
-                cost = 80;
-            else if (age >= 20 && age < 65)
-                cost = 120;
-            else if (age >= 65 && age <= 100)
-                cost = 90;
-            else
-                cost = AgeVerification();   //To fix: Could become recursive.
-
-            return cost;
         }
 
         private static void TicketPriceForOne()
@@ -99,10 +85,35 @@ namespace FlowCinemaMenu
         {
             Console.WriteLine("Vänligen skriv vad du vill ha upprepat.");
             string textToRepeat = AskForString("Text");
-            for (int i = 0;i < 10; i++)
+            for (int i = 0; i < 10; i++)
             {
-                Console.Write(textToRepeat);
+                Console.Write($"{i}. {textToRepeat}, ");
             }
+        }
+
+        private static void TheThirdWord()
+        {
+            string sentence = AskForString("Mening som är minst 3 ord lång");
+            string[] wordsInSentence = sentence.Split(' ');                     
+            Console.WriteLine(wordsInSentence[2]);
+        }
+
+        private static int AgeVerification()
+        {
+            int age = AskForInt("Ålder");
+            int cost = 0;
+            if (age > 0 && age <= 5 || age > 100)
+                cost = 0;
+            else if (age > 5 && age < 20)
+                cost = 80;
+            else if (age >= 20 && age < 65)
+                cost = 120;
+            else if (age >= 65 && age <= 100)
+                cost = 90;
+            else
+                cost = AgeVerification();   //To fix: Could become recursive.
+
+            return cost;
         }
 
         private static string AskForString(string prompt)
