@@ -23,6 +23,9 @@ namespace FlowCinemaMenu
                 case "1":
                     TicketPriceForOne();
                     return true;
+                case "2":
+                    TicketPriceForX();
+                    return true;
                 default:
                     Console.WriteLine("Vänligen gör ett korrekt val i menyn.");
                     return true;
@@ -33,7 +36,59 @@ namespace FlowCinemaMenu
         {   
             Console.WriteLine("Välkommen till din lokala biograf. Gör ett val:");
             Console.WriteLine("1) Biljettpris för en besökare");
+            Console.WriteLine("2) Biljettpris för flera besökare");
             Console.WriteLine("0) Quit / Exit");
+        }
+
+        private static int AgeVerification()
+        {
+            int age = AskForInt("Ålder");
+            int cost = 0;
+            if (age > 0 && age <= 5 || age > 100)
+                cost = 0;
+            else if (age > 5 && age < 20)
+                cost = 80;
+            else if (age >= 20 && age < 65)
+                cost = 120;
+            else if (age >= 65 && age <= 100)
+                cost = 90;
+            else
+                cost = AgeVerification();   //To fix: Could become recursive.
+
+            return cost;
+        }
+
+        private static void TicketPriceForOne()
+        {
+            int cost = AgeVerification();
+            switch (cost)
+            {
+                case 0:
+                    Console.WriteLine("Du går gratis!");
+                    break;
+                case 80:
+                    Console.WriteLine("Ungdomspris: 80kr");
+                    break;
+                case 90:
+                    Console.WriteLine("Pensionärspris: 90kr");
+                    break;
+                case 120:
+                    Console.WriteLine("Standardpris: 120kr");
+                    break;
+            }
+        }
+
+        private static void TicketPriceForX()
+        {
+            Console.WriteLine("Hur många besökare är ni?");
+            int visitors = AskForInt("Besökare");
+            int totalCost = 0;
+
+            for (int i = 0; i < visitors; i++)
+            {
+                totalCost += AgeVerification();
+            }
+            Console.WriteLine($"Ni är {visitors} besökare och eran totala kostnad för biljetterna är {totalCost}kr.");
         }
 
         private static string AskForString(string prompt)
@@ -66,54 +121,6 @@ namespace FlowCinemaMenu
                     return result;
                 }
             } while (true);
-        }
-
-        private static int AgeVerification()
-        {
-            int age = AskForInt("Ålder");
-            int cost = 0;
-            if (age > 0 && age <= 5 || age > 100)
-            {
-                cost = 0;
-            }
-            else if (age > 5 && age < 20)
-            {
-                cost = 80;
-            }
-            else if (age >= 20 && age < 65)
-            {
-                cost = 120;
-            }
-            else if (age >= 65 && age <= 100)
-            {
-                cost = 90;
-            }
-            else
-            {
-                cost = AgeVerification();
-            }
-
-            return cost;
-        }
-
-        private static void TicketPriceForOne()
-        {
-            int cost = AgeVerification();
-            switch (cost)
-            {
-                case 0:
-                    Console.WriteLine("Du går gratis!");
-                    break;
-                case 80:
-                    Console.WriteLine("Ungdomspris: 80kr");
-                    break;
-                case 90:
-                    Console.WriteLine("Pensionärspris: 90kr");
-                    break;
-                case 120:
-                    Console.WriteLine("Standardpris: 120kr");
-                    break;
-            }
         }
 
     }
