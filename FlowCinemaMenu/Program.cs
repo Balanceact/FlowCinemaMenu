@@ -85,6 +85,7 @@ namespace FlowCinemaMenu
         {
             Console.WriteLine("Vänligen skriv vad du vill ha upprepat.");
             string textToRepeat = AskForString("Text");
+
             for (int i = 0; i < 10; i++)
             {
                 Console.Write($"{i+1}. {textToRepeat}, ");
@@ -130,6 +131,7 @@ namespace FlowCinemaMenu
         {
             bool success = false;
             string given;
+
             do
             {
                 Console.WriteLine($"{prompt}: ");
@@ -143,6 +145,7 @@ namespace FlowCinemaMenu
                     success = true;
                 }
             } while (!success);
+
             return given;
         }
 
