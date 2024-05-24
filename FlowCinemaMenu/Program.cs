@@ -87,7 +87,7 @@ namespace FlowCinemaMenu
             string textToRepeat = AskForString("Text");
             for (int i = 0; i < 10; i++)
             {
-                Console.Write($"{i}. {textToRepeat}, ");
+                Console.Write($"{i+1}. {textToRepeat}, ");
             }
         }
 
